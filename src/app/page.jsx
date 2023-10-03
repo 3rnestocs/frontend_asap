@@ -8,7 +8,7 @@ import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import { useRouter } from 'next/navigation';
 import { useAuth, useUserSystemStore } from '@/hooks';
 import Inventory from './inventory/page';
-import AddProduct from './inventory/addProduct/page';
+import AddProduct from './addProduct/page';
 
 const drawerWidth = 240;
 
