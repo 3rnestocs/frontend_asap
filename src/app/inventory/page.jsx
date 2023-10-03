@@ -19,7 +19,6 @@ import Button from '@mui/material/Button';
 import ControlPointRoundedIcon from '@mui/icons-material/ControlPointRounded';
 import { useWarehousesStore } from '@/hooks/useWarehousesStore';
 import { useEffect } from 'react';
-import { Grid, Item } from '@mui/material';
 import FlagCircleIcon from '@mui/icons-material/FlagCircle';
 
 function Row(props) {
@@ -130,15 +129,15 @@ Row.propTypes = {
     products: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // id can be a string or number
-        name: PropTypes.string.isRequired,
+        nombre: PropTypes.string.isRequired,
         descripcion: PropTypes.string.isRequired,
         tipo: PropTypes.string.isRequired,
         cantidad: PropTypes.number.isRequired,
         costo: PropTypes.number.isRequired,
-        ultimo_cost: PropTypes.number.isRequired,
+        ultimo_cost: PropTypes.number,
         precio: PropTypes.number.isRequired,
         activo: PropTypes.bool.isRequired,
-        fecha_expiracion: PropTypes.string.isRequired,
+        fecha_expiracion: PropTypes.string,
         almacen_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // almacen_id can be a string or number
         unidad_medida_id: PropTypes.string.isRequired,
         proveedor_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // proveedor_id can be a string or number
@@ -220,7 +219,7 @@ export default function Inventory({ onAddProduct }) {
           </TableHead>
           <TableBody>
             {warehouses.map((row) => (
-              <Row key={row.name} row={row} />
+              <Row key={row.id} row={row} />
             ))}
           </TableBody>
         </Table>

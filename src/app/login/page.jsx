@@ -4,7 +4,7 @@ import { Box, Container, AppBar, Toolbar, CssBaseline, Typography } from '@mui/m
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import * as yup from 'yup';
 import { useForm, Controller } from 'react-hook-form';
-import { Input, Text, Button } from '@/components';
+import { Input, Button } from '@/components';
 import { useAuth, useSchema, useUserSystemStore } from '@/hooks';
 import { users } from '@/mockups';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
@@ -89,14 +89,14 @@ export default function Login() {
 		}
 
 		login(userLogin);
-		router.push('/')
+		router.push('/home')
 	}
 
 	useEffect(() => {
 		if (isAuth) {
-			router.push('/');
+			router.push('/home');
 		}
-	}, []);
+	});
 	
 	return (
 		<Container
@@ -134,7 +134,7 @@ export default function Login() {
 								¿Quiénes somos?
 							</Typography>
 							<Typography variant="caption">
-								Abroad es una "Dark kitchen" (Cocina fantasma)  que surge de traer la necesidad de incluir en la gastronomía local de Barquisimeto un platillo a cada cada comensal una experiencia única al tener contacto con diferentes partes
+								Abroad es una {'"Dark kitchen"'} (Cocina fantasma)  que surge de traer la necesidad de incluir en la gastronomía local de Barquisimeto un platillo a cada cada comensal una experiencia única al tener contacto con diferentes partes
 								del mundo a través de nuestros platos. ¿Nuestra misión?
 							</Typography>
 							<Card  sx={{ marginTop: '1em' }}>
