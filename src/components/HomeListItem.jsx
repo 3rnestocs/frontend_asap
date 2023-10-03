@@ -1,10 +1,7 @@
 import React from 'react';
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { useRouter } from 'next/navigation';
 
-function HomeListItem({ name, icon, color = '#20528E', redirectPath, onTap }) {
-  const router = useRouter();
-
+function HomeListItem({ name, icon, color = '#20528E', onTap }) {
   const iconStyle = {
     color: color,
   };
@@ -12,10 +9,6 @@ function HomeListItem({ name, icon, color = '#20528E', redirectPath, onTap }) {
   const handleClick = () => {
     if (onTap) {
       onTap();
-    }
-
-    if (redirectPath) {
-      router.push(redirectPath);
     }
   };
 

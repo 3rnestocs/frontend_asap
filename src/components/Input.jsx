@@ -1,5 +1,8 @@
+import React from 'react';
 import { TextField } from '@mui/material';
 
-export default function Input({ label, ...rest }) {
-	return <TextField variant='outlined' label={label} {...rest} />;
-}
+const Input = React.forwardRef(({ label, ...rest }, ref) => {
+  return <TextField variant='outlined' label={label} inputRef={ref} {...rest} />;
+});
+
+export default Input;

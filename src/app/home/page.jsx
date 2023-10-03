@@ -7,34 +7,19 @@ import RestaurantRoundedIcon from '@mui/icons-material/RestaurantRounded';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import { useRouter } from 'next/navigation';
 import { useAuth, useUserSystemStore } from '@/hooks';
-import Inventory from './inventory/page';
-import AddProduct from './addProduct/page';
+import Inventory from '../inventory/page';
+import AddProduct from '../addProduct/page';
+import { HomeListItem } from '@/components';
 
 const drawerWidth = 240;
-
-const HomeListItemGenerator = ({ item, handleItemClick }) => {
-  return (
-    <ListItem
-      button
-      onClick={() => handleItemClick(item)}
-    >
-      <ListItemIcon sx={{ color: '#20528E' }}>{item.icon}</ListItemIcon>
-      <ListItemText primary={item.name} />
-    </ListItem>
-  );
-};
 
 export default function Home() {
   const router = useRouter();
   const { isAuth } = useAuth();
-  const userSystem = useUserSystemStore.getState().user;
+  const { userSystem } = useUserSystemStore.getState();
   const logout = useUserSystemStore.getState().logout;
   const [showInventory, setShowInventory] = useState(false);
   const [showProductForm, setShowProductForm] = useState(false);
-  const sidebarItems = [
-    { name: 'Platillos del menú', icon: <RestaurantRoundedIcon />, redirectPath: '/' },
-    { name: 'Inventarios', icon: <Inventory2RoundedIcon />, redirectPath: '/inventory' },
-  ];
 
   // Function to switch to Inventory
   const switchToInventory = () => {
@@ -54,24 +39,20 @@ export default function Home() {
     setShowInventory(false);
   };
 
-  const handleItemClick = (item) => {
-    switch (item.name) {
-      case 'Platillos del menú':
+  const handleItemClick = (index) => {
+
+    switch (index) {
+      case 1:
         switchToDefault();
-        break;
-      case 'Inventarios':
+      case 2:
         switchToInventory();
-        break;
-      case 'Cerrar sesión':
+      case 3:
         logout();
-        router.push(item.redirectPath);
-        break;
-      default:
-        break;
+        router.push('/login');
     }
   };
 
-	useEffect(() => {
+  useEffect(() => {
     if (!isAuth) {
       router.push('/login');
     }
@@ -88,7 +69,7 @@ export default function Home() {
             SISTEMA ASAP
           </Typography>
           <Typography variant="h8" component="div" sx={{ fontWeight: 'light', flex: 1, textAlign: 'center' }}>
-            Bienvenido, {(userSystem.name) ? userSystem.name : 'Usuario'}.
+            Bienvenido, {userSystem && userSystem.name ? userSystem.name : 'Usuario'}.
           </Typography>
         </Toolbar>
       </AppBar>
@@ -104,20 +85,30 @@ export default function Home() {
         <Toolbar />
         <Box sx={{ overflow: 'auto', height: '100%', display: 'flex', flexDirection: 'column' }}>
           <List>
-            {sidebarItems.map((item) => (
-              <HomeListItemGenerator
-                key={item.name}
-                item={item}
-                handleItemClick={handleItemClick}
-              />
-            ))}
+            <HomeListItem 
+            name= 'Platillos del menú'
+            icon={<RestaurantRoundedIcon />}
+            onTap={() => {
+              handleItemClick(1);
+            }}
+            />
+            <HomeListItem
+              name='Inventarios'
+              icon={<Inventory2RoundedIcon />}
+              onTap={() => {
+                handleItemClick(2);
+              }}
+            />
           </List>
           <div style={{ flex: 1 }}></div>
           <List>
             <Divider />
-            <HomeListItemGenerator
-              item={{ name: 'Cerrar sesión', icon: <ExitToAppRoundedIcon />, redirectPath: '/login' }}
-              handleItemClick={handleItemClick}
+            <HomeListItem
+              name='Cerrar sesión'
+              icon={<ExitToAppRoundedIcon />}
+              onTap={() => {
+                handleItemClick(3);
+              }}
             />
           </List>
         </Box>
