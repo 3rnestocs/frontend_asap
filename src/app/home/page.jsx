@@ -10,13 +10,14 @@ import { useAuth, useUserSystemStore } from '@/hooks';
 import Inventory from '../inventory/page';
 import AddProduct from '../addProduct/page';
 import { HomeListItem } from '@/components';
+import { set } from 'react-hook-form';
 
 const drawerWidth = 240;
 
 export default function Home() {
   const router = useRouter();
   const { isAuth } = useAuth();
-  const { userSystem } = useUserSystemStore.getState();
+  const { user } = useUserSystemStore.getState();
   const logout = useUserSystemStore.getState().logout;
   const [showInventory, setShowInventory] = useState(false);
   const [showProductForm, setShowProductForm] = useState(false);
@@ -44,11 +45,14 @@ export default function Home() {
     switch (index) {
       case 1:
         switchToDefault();
-      case 2:
-        switchToInventory();
+        break;
+        case 2:
+          switchToInventory();
+          break;
       case 3:
         logout();
         router.push('/login');
+        break;
     }
   };
 
@@ -69,7 +73,7 @@ export default function Home() {
             SISTEMA ASAP
           </Typography>
           <Typography variant="h8" component="div" sx={{ fontWeight: 'light', flex: 1, textAlign: 'center' }}>
-            Bienvenido, {userSystem && userSystem.name ? userSystem.name : 'Usuario'}.
+            Bienvenido, {user && user.name ? user.name : 'Usuario'}.
           </Typography>
         </Toolbar>
       </AppBar>
