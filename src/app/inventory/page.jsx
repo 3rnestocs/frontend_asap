@@ -200,7 +200,7 @@ export default function Inventory({ onAddProduct }) {
             }
           }}
           onClick={() => {
-            addProduct();
+            console.log('Generar reporte');
           }}
         >
           Generar reporte

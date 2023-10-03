@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const theme = createTheme({
 	palette: {
@@ -92,10 +92,12 @@ export default function Login() {
 		router.push('/')
 	}
 
-	if (isAuth) {
-		return router.push('/');
-	}
-
+	useEffect(() => {
+		if (isAuth) {
+			router.push('/');
+		}
+	}, []);
+	
 	return (
 		<Container
 			fixed

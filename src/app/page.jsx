@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, AppBar, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography, CssBaseline } from '@mui/material';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
@@ -71,9 +71,11 @@ export default function Home() {
     }
   };
 
-	if (!isAuth) {
-		return router.push('/login');
-	}
+	useEffect(() => {
+    if (!isAuth) {
+      router.push('/login');
+    }
+  }, []);
 
   return (
     <Box sx={{ display: 'flex', backgroundColor: '#EEEEEE', minHeight: '100vh' }}>
