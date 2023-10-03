@@ -7,17 +7,16 @@ import RestaurantRoundedIcon from '@mui/icons-material/RestaurantRounded';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import { useRouter } from 'next/navigation';
 import { useAuth, useUserSystemStore } from '@/hooks';
-import Inventory from '../inventory/page';
-import AddProduct from '../addProduct/page';
+import Inventory from './inventory/page';
+import AddProduct from './addProduct/page';
 import { HomeListItem } from '@/components';
-import { set } from 'react-hook-form';
 
 const drawerWidth = 240;
 
 export default function Home() {
   const router = useRouter();
   const { isAuth } = useAuth();
-  const { user } = useUserSystemStore.getState();
+  const { userSystem } = useUserSystemStore.getState();
   const logout = useUserSystemStore.getState().logout;
   const [showInventory, setShowInventory] = useState(false);
   const [showProductForm, setShowProductForm] = useState(false);
@@ -73,7 +72,7 @@ export default function Home() {
             SISTEMA ASAP
           </Typography>
           <Typography variant="h8" component="div" sx={{ fontWeight: 'light', flex: 1, textAlign: 'center' }}>
-            Bienvenido, {user && user.name ? user.name : 'Usuario'}.
+            Bienvenido, {userSystem && userSystem.name ? userSystem.name : 'Usuario'}.
           </Typography>
         </Toolbar>
       </AppBar>

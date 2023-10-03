@@ -89,12 +89,12 @@ export default function Login() {
 		}
 
 		login(userLogin);
-		router.push('/home')
+		router.push('/')
 	}
 
 	useEffect(() => {
 		if (isAuth) {
-			router.push('/home');
+			router.push('/');
 		}
 	});
 	

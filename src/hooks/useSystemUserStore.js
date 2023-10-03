@@ -29,20 +29,20 @@ export const useUserSystemStore = create(
 			userSystem: userInitialState(),
 			login: (newUser) =>
 				set(() => {
-					return { user: { ...newUser } };
+					return { userSystem: { ...newUser } };
 				}),
 			logout: () =>
 				set(() => {
-					return { user: baseUser };
+					return { userSystem: baseUser };
 				}),
 			editUserSystem: (data) =>
 				set((state) => {
-					const user = { ...state, ...data };
-					return { user };
+					const userSystem = { ...state, ...data };
+					return { userSystem };
 				})
 		}),
 		{
-			name: 'user'
+			name: 'userSystem'
 		}
 	)
 );
